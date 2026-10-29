@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b10">
+  <title>FRAME | Movies & Series</title>
+
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #141820;
+      --text: #f5f5f2;
+      --muted: #a2a6b0;
+      --accent: #d7fb5e;
+      --line: rgba(255,255,255,.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(1440px, 90%);
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      min-height: 82px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 21px;
+      letter-spacing: 5px;
+      font-weight: 900;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #10140a;
+      letter-spacing: -2px;
+    }
+
+    .logo span:last-child span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    nav button {
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 10px 0;
+    }
+
+    nav button:hover,
+    nav button.active {
+      color: white;
+    }
+
+    nav button.active {
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    #searchInput {
+      width: 220px;
+      padding: 11px 15px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: #141820;
+      color: white;
+      font-size: 12px;
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #141820;
+      font-weight: bold;
+    }
+
+    /* FEATURED HERO */
+
+    .hero {
+      position: relative;
+      min-height: 430px;
+      margin-top: 28px;
+      overflow: hidden;
+      border-radius: 22px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      background: #17151d;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      padding: 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      margin: 22px 0 15px;
+      font-size: clamp(38px, 5.5vw, 72px);
+      font-weight: 950;
+      line-height: .92;
+      letter-spacing: -4px;
+    }
+
+    .hero h1 span {
+      color: transparent;
+      -webkit-text-stroke: 1px white;
+    }
+
+    .hero-meta {
+      color: #d0d0d5;
+      font-size: 12px;
+      margin-bottom: 17px;
+    }
+
+    .hero-meta strong {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 410px;
+      color: #c2c4cc;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 30px;
+      padding: 12px 18px;
+      font-size: 12px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #141820;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.08);
+      color: white;
+      border-color: var(--line);
+    }
+
+    .hero-image {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      object-position: center 25%;
+      inset: 0;
+    }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, #17151d 0%, transparent 55%),
+        linear-gradient(0deg, rgba(9,11,16,.25), transparent 65%);
+    }
+
+    /* SECTION HEADINGS */
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 15px;
+      margin: 42px 0 22px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 10px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(23px, 3vw, 32px);
+      letter-spacing: -1px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .reset-button {
+      border: none;
+      background: none;
+      color: var(--accent);
+      font-size: 12px;
+      padding: 8px 0;
+    }
+
+    /* GENRE FILTERS */
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 23px;
+    }
+
+    .filter {
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: #141820;
+      color: #b8bdc6;
+      font-size: 11px;
+      transition: .2s;
+    }
+
+    .filter:hover {
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .filter.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #141820;
+    }
+
+    /* HIERARCHY GRID */
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .movie-card {
+      min-width: 0;
+      cursor: pointer;
+    }
+
+    .poster {
+      position: relative;
+      display: block;
+      aspect-ratio: 2 / 2.9;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #20232c;
+      border: 1px solid rgba(255,255,255,.09);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .35s;
+    }
+
+    .poster.image-unavailable,
+    .hero-image.image-unavailable,
+    .modal-top.image-unavailable {
+      background:
+        radial-gradient(circle at 50% 28%, rgba(215,251,94,.16), transparent 38%),
+        linear-gradient(145deg, #252b37, #141820 58%, #090b10);
+    }
+
+    .poster.image-unavailable img,
+    .hero-image.image-unavailable img,
+    .modal-top.image-unavailable img {
+      display: none;
+    }
+
+    .poster.image-unavailable::before,
+    .hero-image.image-unavailable::before,
+    .modal-top.image-unavailable::before {
+      content: attr(data-poster-title);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--accent);
+      font-size: clamp(14px, 2.4vw, 28px);
+      font-weight: 900;
+      letter-spacing: 3px;
+      line-height: 1.3;
+      text-align: center;
+      text-shadow: 0 2px 16px rgba(0,0,0,.65);
+    }
+
+    .modal-top.image-unavailable::after {
+      display: none;
+    }
+
+    .movie-card:hover .poster {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.4);
+    }
+
+    .movie-card:hover .poster img {
+      transform: scale(1.045);
+    }
+
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.16));
+      pointer-events: none;
+    }
+
+    .card-info {
+      padding-top: 12px;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    .card-title {
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .save-button {
+      flex-shrink: 0;
+      border: none;
+      background: none;
+      color: #9ba1ac;
+      font-size: 21px;
+      padding: 0 3px;
+    }
+
+    .save-button.saved,
+    .save-button:hover {
+      color: var(--accent);
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      color: #969ca7;
+      font-size: 10px;
+      margin-top: 7px;
+    }
+
+    .rating {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .empty-state {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 45px 20px;
+      border: 1px dashed #3c414b;
+      border-radius: 15px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* LOWER CONTENT */
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      margin: 45px 0;
+    }
+
+    .feature-box {
+      position: relative;
+      overflow: hidden;
+      padding: 27px;
+      min-height: 185px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(130deg, #1a2028, #12151c);
+    }
+
+    .feature-box h3 {
+      font-size: 24px;
+      letter-spacing: -1px;
+      margin: 15px 0 10px;
+    }
+
+    .feature-box p {
+      color: var(--muted);
+      max-width: 380px;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 17px;
+    }
+
+    .feature-box .watermark {
+      position: absolute;
+      bottom: -24px;
+      right: -3px;
+      color: rgba(255,255,255,.035);
+      font-size: 100px;
+      font-weight: 950;
+      pointer-events: none;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding: 24px 0 30px;
+      color: #858b96;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    /* DETAIL MODAL */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.8);
+      backdrop-filter: blur(9px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      width: min(720px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 20px;
+      background: #141820;
+      border: 1px solid var(--line);
+    }
+
+    .modal-top {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+      background: #20232c;
+    }
+
+    .modal-top img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+    }
+
+    .modal-top::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #141820, transparent 75%);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 2;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.65);
+      color: white;
+      font-size: 22px;
+    }
+
+    .modal-content {
+      padding: 0 27px 28px;
+      margin-top: -40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .modal-content h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+    }
+
+    .modal-content .description {
+      color: #c0c5ce;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 17px 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .modal-note {
+      border-top: 1px solid var(--line);
+      padding-top: 13px;
+      color: #89909c;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 150;
+      bottom: 25px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      background: var(--accent);
+      color: #141820;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 30px;
+      transition: .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* RESPONSIVE DESIGN */
+
+    @media (max-width: 1050px) {
+      .movie-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px 16px;
+      }
+
+      header {
+        gap: 22px;
+      }
+
+      nav {
+        gap: 15px;
+      }
+
+      .hero {
+        min-height: 380px;
+      }
+
+      .hero-image {
+        min-height: 380px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: 92%;
+      }
+
+      header {
+        padding: 16px 0;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      nav {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .header-right {
+        gap: 8px;
+      }
+
+      #searchInput {
+        width: min(190px, 42vw);
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: 460px;
+      }
+
+      .hero-copy {
+        padding: 30px 25px;
+        z-index: 3;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 12vw, 63px);
+      }
+
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        opacity: .48;
+      }
+
+      .hero-image::after {
+        background: linear-gradient(90deg, rgba(9,11,16,.65), rgba(9,11,16,.05)),
+                    linear-gradient(0deg, #17151d, transparent 90%);
+      }
+
+      .section-heading {
+        align-items: flex-end;
+      }
+
+      .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 23px 13px;
+      }
+
+      .lower-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-top {
+        height: 240px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header>
+      <button class="logo" id="brandHome" aria-label="Go to home">
+        <span class="logo-mark">F.</span>
+        <span>FR<span>A</span>ME</span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <button class="active" data-nav="home">Discover</button>
+        <button data-nav="series">Series</button>
+        <button data-nav="movies">Movies</button>
+        <button data-nav="mylist">My List <span id="listCount"></span></button>
+      </nav>
+
+      <div class="header-right">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search titles..."
+          aria-label="Search movies and series"
+        >
+        <div class="avatar" title="Profile">V</div>
+      </div>
+    </header>
+
+    <main>
+      <!-- FEATURED TITLE -->
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">● FRAME SPOTLIGHT / 01</div>
+
+          <h1>STRANGER<br><span>THINGS</span></h1>
+
+          <div class="hero-meta">
+            <strong>★ 8.7</strong> &nbsp; | &nbsp; 2016– &nbsp; |
+            &nbsp; Sci-Fi · Mystery
+          </div>
+
+          <p>
+            A quiet town, strange signals, and a world hiding just beneath
+            the surface. Follow the clues where the ordinary ends.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="heroExplore">
+              ▶ Explore title
+            </button>
+
+            <button class="btn btn-secondary" id="heroSave">
+              ♡ <span id="heroSaveLabel">Add to My List</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <img
+            id="heroImage"
+            src="./assets/posters/stranger-things.jpg"
+            alt="Stranger Things poster"
+            onerror="handleImageError(this)"
+          >
+        </div>
+      </section>
+
+      <!-- CATALOG -->
+
+      <section id="catalogSection">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">YOUR NEXT OBSESSION</div>
+            <h2 id="catalogHeading">The watchlist-worthy six</h2>
+            <p id="catalogSubheading">
+              Unusual worlds. Unforgettable stories.
+            </p>
+          </div>
+
+          <button class="reset-button" id="resetView">
+            Reset view ↗
+          </button>
+        </div>
+
+        <!-- GENRE FILTERS -->
+
+        <div class="filters" aria-label="Filter by genre">
+          <button class="filter active" data-filter="all">All titles</button>
+          <button class="filter" data-filter="mystery">Mystery</button>
+          <button class="filter" data-filter="fantasy">Fantasy</button>
+          <button class="filter" data-filter="thriller">Thriller</button>
+          <button class="filter" data-filter="scifi">Sci-Fi</button>
+        </div>
+
+        <!-- MOVIE AND SERIES GRID -->
+
+        <div class="movie-grid" id="movieGrid"></div>
+      </section>
+
+      <!-- EXTRA INTERACTIVE SECTION -->
+
+      <section class="lower-grid">
+        <div class="feature-box">
+          <div class="eyebrow">CURATED FOR YOU</div>
+          <h3>Find your next obsession.</h3>
+          <p>
+            Discover mysteries, strange worlds, unforgettable characters,
+            and films worth talking about.
+          </p>
+
+          <button class="btn btn-primary" id="surpriseMe">
+            Surprise Me
+          </button>
+
+          <div class="watermark">FRAME</div>
+        </div>
+
+        <div class="feature-box">
+          <div class="eyebrow">YOUR COLLECTION</div>
+          <h3>Your titles. Your choice.</h3>
+          <p>
+            Save movies and series to create a personal watchlist.
+            Your saved titles will stay in this browser.
+          </p>
+
+          <button class="btn btn-secondary" id="openList">
+            View My List
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <strong>FRAME © 2026</strong>
+      <span>
+        A personal movie and series website mockup.
+        Posters are loaded from external image sources.
+      </span>
+    </footer>
+  </div>
+
+  <!-- TITLE DETAILS MODAL -->
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal-top">
+        <img id="modalPoster" src="" alt="" onerror="handleImageError(this)">
+      </div>
+
+      <button
+        class="modal-close"
+        id="modalClose"
+        aria-label="Close details"
+      >×</button>
+
+      <div class="modal-content">
+        <div class="eyebrow" id="modalKicker">SERIES PROFILE</div>
+
+        <h2 id="modalTitle">Title</h2>
+
+        <div class="hero-meta" id="modalMeta"></div>
+
+        <p class="description" id="modalDescription"></p>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="modalPlay">
+            ▶ Play Preview
+          </button>
+
+          <button class="btn btn-secondary" id="modalSave">
+            ♡ Add to My List
+          </button>
+        </div>
+
+        <div class="modal-note" id="modalNote">
+          Design prototype only. No movie or episode is streamed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // MOVIE AND SERIES DATA
+    // Each title uses its own poster image URL.
+
+    const titles = {
+      "high-potential": {
+        title: "High Potential",
+        kind: "Series",
+        year: "2024–",
+        rating: "7.6",
+        genres: ["Mystery", "Crime", "Drama"],
+        genreKeys: ["mystery"],
+        poster: "./assets/posters/high-potential.jpg",
+        description:
+          "A single mother with an extraordinary mind helps solve complex crimes by noticing the details everyone else misses."
+      },
+
+      "wheel-of-time": {
+        title: "The Wheel of Time",
+        kind: "Series",
+        year: "2021–",
+        rating: "7.2",
+        genres: ["Fantasy", "Adventure", "Drama"],
+        genreKeys: ["fantasy"],
+        poster: "./assets/posters/wheel-of-time.jpg",
+        description:
+          "In a world shaped by ancient prophecies, a group of young people becomes caught in a journey that could change the fate of the world."
+      },
+
+      "from": {
+        title: "FROM",
+        kind: "Series",
+        year: "2022–",
+        rating: "7.8",
+        genres: ["Mystery", "Horror", "Thriller"],
+        genreKeys: ["mystery", "thriller"],
+        poster: "./assets/posters/from.jpg",
+        description:
+          "Strangers become trapped in a mysterious town where every road leads back and terrifying creatures emerge after dark."
+      },
+
+      "the-platform": {
+        title: "The Platform",
+        kind: "Movie",
+        year: "2019",
+        rating: "7.0",
+        genres: ["Thriller", "Sci-Fi", "Horror"],
+        genreKeys: ["thriller", "scifi"],
+        poster: "./assets/posters/the-platform.jpg",
+        description:
+          "In a vertical prison, food descends one level at a time. The system becomes a brutal test of survival, morality, and human behavior."
+      },
+
+      "welcome-to-derry": {
+        title: "IT: Welcome to Derry",
+        kind: "Series",
+        year: "2025",
+        rating: "New",
+        genres: ["Horror", "Mystery", "Supernatural"],
+        genreKeys: ["thriller", "mystery"],
+        poster: "./assets/posters/welcome-to-derry.jpg",
+        description:
+          "Return to the unsettling world of Derry and explore the town's dark history, where ordinary childhood fears become something far more sinister."
+      },
+
+      "stranger-things": {
+        title: "Stranger Things",
+        kind: "Series",
+        year: "2016–",
+        rating: "8.7",
+        genres: ["Sci-Fi", "Mystery", "Adventure"],
+        genreKeys: ["scifi", "mystery"],
+        poster: "./assets/posters/stranger-things.jpg",
+        description:
+          "When a young boy disappears, his friends uncover secret experiments, unusual powers, and a dangerous world hidden beneath their quiet town."
+      }
+    };
+
+    const movieGrid = document.getElementById("movieGrid");
+    const searchInput = document.getElementById("searchInput");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const toast = document.getElementById("toast");
+
+    let activeFilter = "all";
+    let navView = "home";
+    let activeTitleId = "stranger-things";
+    let toastTimer;
+
+    // LOAD SAVED TITLES
+
+    let saved = new Set();
+
+    try {
+      saved = new Set(
+        JSON.parse(localStorage.getItem("frame-saved-titles") || "[]")
+      );
+    } catch (error) {
+      saved = new Set();
+    }
+
+    // CREATE THE POSTER GRID
+
+    function handleImageError(img) {
+      const container = img.closest(".poster, .hero-image, .modal-top");
+
+      if (!container) return;
+
+      container.classList.add("image-unavailable");
+      container.dataset.posterTitle = img.alt.replace(
+        /\s+(official\s+)?(cover\s+)?poster$/i,
+        ""
+      );
+    }
+
+    function renderCards() {
+      movieGrid.innerHTML = Object.entries(titles).map(([id, item]) => `
+        <article
+          class="movie-card"
+          data-id="${id}"
+          data-kind="${item.kind.toLowerCase()}"
+        >
+          <button
+            class="poster"
+            data-open="${id}"
+            aria-label="View ${item.title} details"
+            style="width:100%;border:0;padding:0;color:inherit;cursor:pointer"
+          >
+            <img
+              src="${item.poster}"
+              alt="${item.title} official cover poster"
+              loading="lazy"
+              decoding="async"
+              onerror="handleImageError(this)"
+            >
+          </button>
+
+          <div class="card-info">
+            <div class="card-title-row">
+              <span class="card-title">${item.title}</span>
+
+              <button
+                class="save-button ${saved.has(id) ? "saved" : ""}"
+                data-save="${id}"
+                aria-label="${saved.has(id) ? "Remove" : "Save"} ${item.title}"
+                aria-pressed="${saved.has(id)}"
+                title="Add or remove from My List"
+              >${saved.has(id) ? "♥" : "♡"}</button>
+            </div>
+
+            <div class="card-meta">
+              <span class="rating">★ ${item.rating}</span>
+              <span>·</span>
+              <span>${item.genres[0]}</span>
+              <span>·</span>
+              <span>${item.year}</span>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      applyView();
+      updateSavedUI();
+    }
+
+    // SAVE TO LOCAL STORAGE
+
+    function saveData() {
+      try {
+        localStorage.setItem(
+          "frame-saved-titles",
+          JSON.stringify([...saved])
+        );
+      } catch (error) {
+        console.warn("Saved list could not be stored in this browser.");
+      }
+    }
+
+    // NOTIFICATION MESSAGE
+
+    function notify(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    // UPDATE THE SAVE BUTTONS
+
+    function updateSavedUI() {
+      document.getElementById("listCount").textContent =
+        saved.size ? `(${saved.size})` : "";
+
+      document.querySelectorAll("[data-save]").forEach(button => {
+        const id = button.dataset.save;
+        const isSaved = saved.has(id);
+
+        button.classList.toggle("saved", isSaved);
+        button.textContent = isSaved ? "♥" : "♡";
+        button.setAttribute("aria-pressed", String(isSaved));
+
+        if (titles[id]) {
+          button.setAttribute(
+            "aria-label",
+            `${isSaved ? "Remove" : "Save"} ${titles[id].title}`
+          );
+        }
+      });
+
+      const heroSaved = saved.has("stranger-things");
+      const heroSave = document.getElementById("heroSave");
+
+      document.getElementById("heroSaveLabel").textContent =
+        heroSaved ? "Saved to My List" : "Add to My List";
+
+      heroSave.classList.toggle("btn-primary", heroSaved);
+      heroSave.classList.toggle("btn-secondary", !heroSaved);
+
+      const modalSave = document.getElementById("modalSave");
+
+      if (titles[activeTitleId]) {
+        modalSave.textContent = saved.has(activeTitleId)
+          ? "♥ Saved to My List"
+          : "♡ Add to My List";
+      }
+    }
+
+    // ADD OR REMOVE A TITLE
+
+    function toggleSave(id) {
+      const item = titles[id];
+
+      if (!item) return;
+
+      if (saved.has(id)) {
+        saved.delete(id);
+        notify(`Removed ${item.title} from My List`);
+      } else {
+        saved.add(id);
+        notify(`Added ${item.title} to My List`);
+      }
+
+      saveData();
+      updateSavedUI();
+      applyView();
+    }
+
+    // OPEN TITLE DETAILS
+
+    function openDetails(id) {
+      const item = titles[id];
+
+      if (!item) return;
+
+      activeTitleId = id;
+
+      const modalPoster = document.getElementById("modalPoster");
+      const modalTop = modalPoster.closest(".modal-top");
+      modalTop.classList.remove("image-unavailable");
+      modalTop.dataset.posterTitle = item.title;
+      modalPoster.src = item.poster;
+      modalPoster.alt = `${item.title} cover poster`;
+
+      document.getElementById("modalKicker").textContent =
+        item.kind === "Movie" ? "MOVIE PROFILE" : "SERIES PROFILE";
+
+      document.getElementById("modalTitle").textContent = item.title;
+
+      document.getElementById("modalMeta").textContent =
+        `★ ${item.rating}  |  ${item.year}  |  ${item.genres.join(" · ")}`;
+
+      document.getElementById("modalDescription").textContent =
+        item.description;
+
+      document.getElementById("modalNote").textContent =
+        "This is a website mockup. The preview button demonstrates an interaction; no movie or episode is streamed.";
+
+      document.getElementById("modalPlay").textContent = "▶ Play Preview";
+
+      updateSavedUI();
+
+      modalBackdrop.classList.add("open");
+      document.body.style.overflow = "hidden";
+
+      document.getElementById("modalClose").focus();
+    }
+
+    // CLOSE THE DETAIL WINDOW
+
+    function closeModal() {
+      modalBackdrop.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    // SEARCH, GENRE FILTERS, AND NAVIGATION
+
+    function applyView() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      document.querySelectorAll(".movie-card").forEach(card => {
+        const id = card.dataset.id;
+        const item = titles[id];
+
+        if (!item) return;
+
+        const searchableText = [
+          item.title,
+          item.kind,
+          item.year,
+          ...item.genres
+        ].join(" ").toLowerCase();
+
+        const matchesSearch =
+          !query || searchableText.includes(query);
+
+        const matchesGenre =
+          activeFilter === "all" ||
+          item.genreKeys.includes(activeFilter);
+
+        const matchesNav =
+          navView === "home" ||
+          (navView === "series" && item.kind === "Series") ||
+          (navView === "movies" && item.kind === "Movie") ||
+          (navView === "mylist" && saved.has(id));
+
+        const isVisible =
+          matchesSearch && matchesGenre && matchesNav;
+
+        card.classList.toggle("hidden", !isVisible);
+
+        if (isVisible) visibleCount++;
+      });
+
+      let headings = {
+        home: [
+          "The watchlist-worthy six",
+          "Unusual worlds. Unforgettable stories."
+        ],
+        series: [
+          "Series worth getting lost in",
+          "Long stories. Strange places. Bigger questions."
+        ],
+        movies: [
+          "Movie night, sorted",
+          "Find your next film."
+        ],
+        mylist: [
+          "Your saved titles",
+          saved.size
+            ? `${saved.size} saved title${saved.size === 1 ? "" : "s"} in your personal list.`
+            : "Tap a heart on any title to build your list."
+        ]
+      };
+
+      document.getElementById("catalogHeading").textContent =
+        headings[navView][0];
+
+      document.getElementById("catalogSubheading").textContent =
+        headings[navView][1];
+
+      let emptyState = document.getElementById("emptyState");
+
+      if (!emptyState) {
+        emptyState = document.createElement("div");
+        emptyState.id = "emptyState";
+        emptyState.className = "empty-state";
+        emptyState.textContent =
+          "No titles found. Try another search or filter.";
+        movieGrid.appendChild(emptyState);
+      }
+
+      emptyState.style.display =
+        visibleCount === 0 ? "block" : "none";
+
+      document.querySelectorAll("[data-nav]").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.nav === navView
+        );
+      });
+
+      document.querySelectorAll("[data-filter]").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.filter === activeFilter
+        );
+      });
+    }
+
+    // CLICK INTERACTIONS
+
+    movieGrid.addEventListener("click", event => {
+      const saveButton = event.target.closest("[data-save]");
+
+      if (saveButton) {
+        event.stopPropagation();
+        toggleSave(saveButton.dataset.save);
+        return;
+      }
+
+      const openButton = event.target.closest("[data-open]");
+
+      if (openButton) {
+        openDetails(openButton.dataset.open);
+      }
+    });
+
+    document.getElementById("brandHome").addEventListener("click", () => {
+      navView = "home";
+      activeFilter = "all";
+      searchInput.value = "";
+
+      applyView();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    document.querySelectorAll("[data-nav]").forEach(button => {
+      button.addEventListener("click", () => {
+        navView = button.dataset.nav;
+
+        if (navView === "movies") {
+          activeFilter = "all";
+        }
+
+        applyView();
+
+        document.getElementById("catalogSection").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-filter]").forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        applyView();
+      });
+    });
+
+    searchInput.addEventListener("input", () => {
+      applyView();
+    });
+
+    document.getElementById("heroExplore").addEventListener("click", () => {
+      openDetails("stranger-things");
+    });
+
+    document.getElementById("heroSave").addEventListener("click", () => {
+      toggleSave("stranger-things");
+    });
+
+    document.getElementById("modalClose").addEventListener("click", () => {
+      closeModal();
+    });
+
+    modalBackdrop.addEventListener("click", event => {
+      if (event.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (
+        event.key === "Escape" &&
+        modalBackdrop.classList.contains("open")
+      ) {
+        closeModal();
+      }
+    });
+
+    document.getElementById("modalSave").addEventListener("click", () => {
+      toggleSave(activeTitleId);
+    });
+
+    document.getElementById("modalPlay").addEventListener("click", () => {
+      document.getElementById("modalPlay").textContent =
+        "▶ Preview Selected";
+
+      document.getElementById("modalNote").textContent =
+        "Demo preview selected. Connect a licensed trailer or video source for actual playback.";
+
+      notify("Demo preview selected — no video is attached.");
+    });
+
+    document.getElementById("resetView").addEventListener("click", () => {
+      navView = "home";
+      activeFilter = "all";
+      searchInput.value = "";
+
+      applyView();
+    });
+
+    document.getElementById("openList").addEventListener("click", () => {
+      navView = "mylist";
+
+      applyView();
+
+      document.getElementById("catalogSection").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    document.getElementById("surpriseMe").addEventListener("click", () => {
+      const visibleCards = [
+        ...document.querySelectorAll(".movie-card:not(.hidden)")
+      ];
+
+      if (visibleCards.length === 0) {
+        notify("No titles available for the current filters.");
+        return;
+      }
+
+      const chosen =
+        visibleCards[Math.floor(Math.random() * visibleCards.length)];
+
+      openDetails(chosen.dataset.id);
+    });
+
+    // INITIALIZE WEBSITE
+
+    renderCards();
+  </script>
+</body>
+</html>
