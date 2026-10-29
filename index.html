@@ -2,1480 +2,208 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090b10">
-  <title>FRAME | Movies & Series</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9f5">
+  <title>Purrfectly — Cat Inspiration</title>
   <style>
-    :root {
-      --bg: #090b10;
-      --panel: #141820;
-      --text: #f5f5f2;
-      --muted: #a2a6b0;
-      --accent: #d7fb5e;
-      --line: rgba(255,255,255,.12);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    button:focus-visible,
-    input:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    .container {
-      width: min(1440px, 90%);
-      margin: auto;
-    }
-
-    /* HEADER */
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 38px;
-      min-height: 82px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 21px;
-      letter-spacing: 5px;
-      font-weight: 900;
-    }
-
-    .logo-mark {
-      display: grid;
-      place-items: center;
-      width: 35px;
-      height: 35px;
-      border-radius: 10px;
-      background: var(--accent);
-      color: #10140a;
-      letter-spacing: -2px;
-    }
-
-    .logo span:last-child span {
-      color: var(--accent);
-    }
-
-    nav {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-    }
-
-    nav button {
-      border: none;
-      background: none;
-      color: var(--muted);
-      font-size: 13px;
-      padding: 10px 0;
-    }
-
-    nav button:hover,
-    nav button.active {
-      color: white;
-    }
-
-    nav button.active {
-      border-bottom: 2px solid var(--accent);
-    }
-
-    .header-right {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    #searchInput {
-      width: 220px;
-      padding: 11px 15px;
-      border-radius: 30px;
-      border: 1px solid var(--line);
-      background: #141820;
-      color: white;
-      font-size: 12px;
-    }
-
-    .avatar {
-      width: 35px;
-      height: 35px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #141820;
-      font-weight: bold;
-    }
-
-    /* FEATURED HERO */
-
-    .hero {
-      position: relative;
-      min-height: 430px;
-      margin-top: 28px;
-      overflow: hidden;
-      border-radius: 22px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      background: #17151d;
-    }
-
-    .hero-copy {
-      position: relative;
-      z-index: 2;
-      padding: 45px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
-    .hero h1 {
-      margin: 22px 0 15px;
-      font-size: clamp(38px, 5.5vw, 72px);
-      font-weight: 950;
-      line-height: .92;
-      letter-spacing: -4px;
-    }
-
-    .hero h1 span {
-      color: transparent;
-      -webkit-text-stroke: 1px white;
-    }
-
-    .hero-meta {
-      color: #d0d0d5;
-      font-size: 12px;
-      margin-bottom: 17px;
-    }
-
-    .hero-meta strong {
-      color: var(--accent);
-    }
-
-    .hero p {
-      max-width: 410px;
-      color: #c2c4cc;
-      font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 22px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn {
-      border: 1px solid transparent;
-      border-radius: 30px;
-      padding: 12px 18px;
-      font-size: 12px;
-      font-weight: 800;
-      transition: .2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #141820;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.08);
-      color: white;
-      border-color: var(--line);
-    }
-
-    .hero-image {
-      position: relative;
-      min-height: 430px;
-      overflow: hidden;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      object-fit: cover;
-      object-position: center 25%;
-      inset: 0;
-    }
-
-    .hero-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, #17151d 0%, transparent 55%),
-        linear-gradient(0deg, rgba(9,11,16,.25), transparent 65%);
-    }
-
-    /* SECTION HEADINGS */
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 15px;
-      margin: 42px 0 22px;
-    }
-
-    .section-kicker {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 10px;
-      font-weight: 800;
-      margin-bottom: 9px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(23px, 3vw, 32px);
-      letter-spacing: -1px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 8px;
-    }
-
-    .reset-button {
-      border: none;
-      background: none;
-      color: var(--accent);
-      font-size: 12px;
-      padding: 8px 0;
-    }
-
-    /* GENRE FILTERS */
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-bottom: 23px;
-    }
-
-    .filter {
-      padding: 9px 15px;
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      background: #141820;
-      color: #b8bdc6;
-      font-size: 11px;
-      transition: .2s;
-    }
-
-    .filter:hover {
-      border-color: var(--accent);
-      color: white;
-    }
-
-    .filter.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #141820;
-    }
-
-    /* HIERARCHY GRID */
-
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .movie-card {
-      min-width: 0;
-      cursor: pointer;
-    }
-
-    .poster {
-      position: relative;
-      display: block;
-      aspect-ratio: 2 / 2.9;
-      overflow: hidden;
-      border-radius: 12px;
-      background: #20232c;
-      border: 1px solid rgba(255,255,255,.09);
-      transition: transform .25s, box-shadow .25s;
-    }
-
-    .poster img {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      inset: 0;
-      object-fit: cover;
-      object-position: center;
-      transition: transform .35s;
-    }
-
-    .poster.image-unavailable,
-    .hero-image.image-unavailable,
-    .modal-top.image-unavailable {
-      background:
-        radial-gradient(circle at 50% 28%, rgba(215,251,94,.16), transparent 38%),
-        linear-gradient(145deg, #252b37, #141820 58%, #090b10);
-    }
-
-    .poster.image-unavailable img,
-    .hero-image.image-unavailable img,
-    .modal-top.image-unavailable img {
-      display: none;
-    }
-
-    .poster.image-unavailable::before,
-    .hero-image.image-unavailable::before,
-    .modal-top.image-unavailable::before {
-      content: attr(data-poster-title);
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      color: var(--accent);
-      font-size: clamp(14px, 2.4vw, 28px);
-      font-weight: 900;
-      letter-spacing: 3px;
-      line-height: 1.3;
-      text-align: center;
-      text-shadow: 0 2px 16px rgba(0,0,0,.65);
-    }
-
-    .modal-top.image-unavailable::after {
-      display: none;
-    }
-
-    .movie-card:hover .poster {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0,0,0,.4);
-    }
-
-    .movie-card:hover .poster img {
-      transform: scale(1.045);
-    }
-
-    .poster::after {
-      content: "";
-      position: absolute;
-      inset: 45% 0 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.16));
-      pointer-events: none;
-    }
-
-    .card-info {
-      padding-top: 12px;
-    }
-
-    .card-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 5px;
-    }
-
-    .card-title {
-      color: white;
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.4;
-    }
-
-    .save-button {
-      flex-shrink: 0;
-      border: none;
-      background: none;
-      color: #9ba1ac;
-      font-size: 21px;
-      padding: 0 3px;
-    }
-
-    .save-button.saved,
-    .save-button:hover {
-      color: var(--accent);
-    }
-
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 7px;
-      color: #969ca7;
-      font-size: 10px;
-      margin-top: 7px;
-    }
-
-    .rating {
-      color: var(--accent);
-      font-weight: 800;
-    }
-
-    .empty-state {
-      display: none;
-      grid-column: 1 / -1;
-      padding: 45px 20px;
-      border: 1px dashed #3c414b;
-      border-radius: 15px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    /* LOWER CONTENT */
-
-    .lower-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      margin: 45px 0;
-    }
-
-    .feature-box {
-      position: relative;
-      overflow: hidden;
-      padding: 27px;
-      min-height: 185px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: linear-gradient(130deg, #1a2028, #12151c);
-    }
-
-    .feature-box h3 {
-      font-size: 24px;
-      letter-spacing: -1px;
-      margin: 15px 0 10px;
-    }
-
-    .feature-box p {
-      color: var(--muted);
-      max-width: 380px;
-      font-size: 12px;
-      line-height: 1.7;
-      margin-bottom: 17px;
-    }
-
-    .feature-box .watermark {
-      position: absolute;
-      bottom: -24px;
-      right: -3px;
-      color: rgba(255,255,255,.035);
-      font-size: 100px;
-      font-weight: 950;
-      pointer-events: none;
-    }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
-      border-top: 1px solid var(--line);
-      padding: 24px 0 30px;
-      color: #858b96;
-      font-size: 10px;
-      line-height: 1.6;
-    }
-
-    /* DETAIL MODAL */
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(0,0,0,.8);
-      backdrop-filter: blur(9px);
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal {
-      position: relative;
-      width: min(720px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      border-radius: 20px;
-      background: #141820;
-      border: 1px solid var(--line);
-    }
-
-    .modal-top {
-      height: 300px;
-      position: relative;
-      overflow: hidden;
-      background: #20232c;
-    }
-
-    .modal-top img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 25%;
-    }
-
-    .modal-top::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, #141820, transparent 75%);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      z-index: 2;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.65);
-      color: white;
-      font-size: 22px;
-    }
-
-    .modal-content {
-      padding: 0 27px 28px;
-      margin-top: -40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .modal-content h2 {
-      font-size: clamp(28px, 5vw, 42px);
-      letter-spacing: -1.5px;
-      margin-bottom: 12px;
-    }
-
-    .modal-content .description {
-      color: #c0c5ce;
-      font-size: 13px;
-      line-height: 1.8;
-      margin: 17px 0;
-    }
-
-    .modal-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0;
-    }
-
-    .modal-note {
-      border-top: 1px solid var(--line);
-      padding-top: 13px;
-      color: #89909c;
-      font-size: 10px;
-      line-height: 1.6;
-    }
-
-    .toast {
-      position: fixed;
-      z-index: 150;
-      bottom: 25px;
-      left: 50%;
-      transform: translate(-50%, 20px);
-      opacity: 0;
-      pointer-events: none;
-      background: var(--accent);
-      color: #141820;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 12px 18px;
-      border-radius: 30px;
-      transition: .25s;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* RESPONSIVE DESIGN */
-
-    @media (max-width: 1050px) {
-      .movie-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 22px 16px;
-      }
-
-      header {
-        gap: 22px;
-      }
-
-      nav {
-        gap: 15px;
-      }
-
-      .hero {
-        min-height: 380px;
-      }
-
-      .hero-image {
-        min-height: 380px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .container {
-        width: 92%;
-      }
-
-      header {
-        padding: 16px 0;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .logo {
-        font-size: 17px;
-      }
-
-      nav {
-        order: 3;
-        width: 100%;
-        overflow-x: auto;
-      }
-
-      .header-right {
-        gap: 8px;
-      }
-
-      #searchInput {
-        width: min(190px, 42vw);
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: 460px;
-      }
-
-      .hero-copy {
-        padding: 30px 25px;
-        z-index: 3;
-      }
-
-      .hero h1 {
-        font-size: clamp(43px, 12vw, 63px);
-      }
-
-      .hero-image {
-        position: absolute;
-        inset: 0;
-        opacity: .48;
-      }
-
-      .hero-image::after {
-        background: linear-gradient(90deg, rgba(9,11,16,.65), rgba(9,11,16,.05)),
-                    linear-gradient(0deg, #17151d, transparent 90%);
-      }
-
-      .section-heading {
-        align-items: flex-end;
-      }
-
-      .movie-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 23px 13px;
-      }
-
-      .lower-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-top {
-        height: 240px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
+    :root{--paper:#fffaf7;--white:#fff;--ink:#312a29;--muted:#897c78;--line:#f0e7e2;--rose:#df625a;--rose-dark:#c94d46;--rose-pale:#fff0ec;--shadow:0 14px 35px rgba(80,45,37,.08)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
+    button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #f0a19a;outline-offset:3px}
+    .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:19px;min-height:76px;padding:11px clamp(15px,4vw,52px);background:rgba(255,250,247,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(15px)}
+    .brand{display:inline-flex;align-items:center;gap:9px;flex:0 0 auto;padding:0;border:0;background:none;color:var(--ink);font-size:20px;font-weight:900;letter-spacing:-1px}
+    .brand-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:14px;background:var(--rose);color:white;font-size:21px;transform:rotate(-7deg)}.brand-name span{color:var(--rose)}
+    .top-nav{display:flex;gap:6px;align-items:center}.top-nav button{padding:11px 14px;border:0;border-radius:22px;background:transparent;color:var(--muted);font-size:11px;font-weight:850}
+    .top-nav button:hover,.top-nav button.active{background:var(--ink);color:white}
+    .search-wrap{position:relative;flex:1 1 260px;max-width:650px;margin-left:auto}.search-wrap:before{content:"⌕";position:absolute;left:17px;top:50%;color:#9e918c;font-size:23px;transform:translateY(-55%);pointer-events:none}
+    #searchInput{width:100%;height:44px;padding:0 18px 0 45px;border:1px solid transparent;border-radius:25px;background:#f2ebe7;color:var(--ink);font-size:12px}
+    #searchInput::placeholder{color:#958984}#searchInput:focus{border-color:#efd0c8;background:white;box-shadow:0 0 0 4px rgba(223,98,90,.08);outline:none}
+    .create-button{height:40px;padding:0 15px;border:0;border-radius:22px;background:var(--rose-pale);color:var(--rose-dark);font-size:10px;font-weight:900}.create-button:hover{background:#ffe3dc}
+    .avatar{display:grid;place-items:center;flex:0 0 auto;width:36px;height:36px;border:3px solid white;border-radius:50%;background:#eac0ae;color:#754c40;font-size:12px;font-weight:900;box-shadow:0 0 0 1px var(--line)}
+    .layout{display:grid;grid-template-columns:220px minmax(0,1fr);max-width:1660px;margin:auto;padding:0 clamp(15px,3.5vw,50px)}
+    .sidebar{position:sticky;top:76px;align-self:start;min-height:calc(100vh - 76px);padding:28px 18px 25px 0;border-right:1px solid var(--line)}
+    .side-heading{margin:0 0 10px;color:#b19f97;font-size:9px;font-weight:900;letter-spacing:1.7px;text-transform:uppercase}
+    .side-links{display:grid;gap:4px;margin-bottom:23px}.side-link{display:flex;align-items:center;gap:10px;width:100%;min-height:39px;padding:7px 10px;border:0;border-radius:11px;background:transparent;color:#6d625e;text-align:left;font-size:10px;font-weight:800}
+    .side-link:hover,.side-link.active{background:white;color:var(--rose-dark);box-shadow:0 4px 16px rgba(80,45,37,.05)}
+    .side-icon{display:grid;place-items:center;width:23px;height:23px;border-radius:8px;background:var(--rose-pale);color:var(--rose);font-size:12px}
+    .side-group{margin-bottom:21px}.board-box{margin-top:23px;padding:13px;border:1px solid #f3dfd7;border-radius:15px;background:linear-gradient(145deg,#fff1eb,#fff9f6)}
+    .board-title{display:flex;justify-content:space-between;margin-bottom:8px;font-size:10px;font-weight:900}.board-title span{color:var(--rose)}
+    .board-line{display:flex;justify-content:space-between;padding:7px 0;color:#756660;font-size:10px;font-weight:750}.board-count{color:#aa9389}
+    .sidebar-note{margin:17px 3px 0;color:#a09590;font-size:9px;line-height:1.7}
+    main{min-width:0;padding:31px 0 55px clamp(21px,3vw,42px)}
+    .breadcrumb{display:flex;gap:8px;align-items:center;margin-bottom:12px;color:#a29088;font-size:10px;font-weight:800}.breadcrumb span:last-child{color:var(--rose-dark)}.breadcrumb b{color:#d1c3bd;font-weight:500}
+    .intro{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:20px}.intro-copy{max-width:740px}
+    .eyebrow{margin-bottom:8px;color:var(--rose);font-size:9px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
+    h1{margin:0;font-size:clamp(32px,4vw,50px);line-height:1.02;letter-spacing:-2.3px}
+    .intro p{margin:11px 0 0;color:var(--muted);font-size:11px;line-height:1.7}.pin-count{flex:0 0 auto;margin-bottom:3px;color:#a4958e;font-size:10px;font-weight:850}
+    .chips{display:flex;gap:8px;overflow-x:auto;padding:3px 2px 12px;scrollbar-width:thin;scrollbar-color:#eadbd4 transparent}
+    .chip{flex:0 0 auto;padding:9px 13px;border:1px solid #f0e4df;border-radius:22px;background:white;color:#786a64;font-size:10px;font-weight:850;transition:all .2s}
+    .chip:hover{transform:translateY(-1px)}.chip.active{border-color:var(--rose);background:var(--rose);color:white;box-shadow:0 7px 16px rgba(223,98,90,.18)}
+    .feed-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0 14px}.feed-head h2{margin:0;font-size:15px;letter-spacing:-.4px}.feed-head span{color:#a1938c;font-size:9px;font-weight:800}
+    .pin-grid{columns:4 200px;column-gap:17px}.pin{display:inline-block;width:100%;margin:0 0 18px;overflow:hidden;break-inside:avoid;border-radius:16px;background:white;box-shadow:0 7px 22px rgba(80,45,37,.055);transition:transform .23s,box-shadow .23s}
+    .pin:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.pin-photo{position:relative;overflow:hidden;background:#f4e9e4;isolation:isolate}
+    .pin-photo-button{display:block;width:100%;padding:0;overflow:hidden;border:0;background:transparent;text-align:left}.pin-photo img{display:block;width:100%;height:auto;transition:transform .4s}
+    .pin:hover .pin-photo img{transform:scale(1.035)}.pin-photo.failed{display:grid;min-height:230px;place-items:center;padding:25px;background:linear-gradient(140deg,#f8dcd1,#eee8f7 55%,#e8f3e9)}
+    .pin-photo.failed:before{content:attr(data-title);color:#8a5d53;font-size:20px;font-weight:900;text-align:center}
+    .breed-badge{position:absolute;bottom:10px;left:10px;padding:6px 9px;border:1px solid rgba(255,255,255,.7);border-radius:18px;background:rgba(255,250,247,.91);color:#665852;font-size:8px;font-weight:900;backdrop-filter:blur(7px);pointer-events:none}
+    .save-pin{position:absolute;top:10px;right:10px;z-index:2;min-height:34px;padding:0 12px;border:0;border-radius:20px;background:var(--rose);color:white;font-size:10px;font-weight:900;opacity:0;transform:translateY(-4px);transition:all .2s}
+    .pin:hover .save-pin,.save-pin:focus-visible,.save-pin.saved{opacity:1;transform:none}.save-pin:hover{background:var(--rose-dark)}
+    .pin-copy{padding:12px 13px 13px}.pin-copy h3{margin:0;font-size:11px;line-height:1.4}.pin-copy p{margin:5px 0 9px;color:#81746e;font-size:9px;line-height:1.55}
+    .credit{padding-top:8px;border-top:1px solid #f3eeeb;color:#aa9c96;font-size:8px;line-height:1.45}.credit a{color:#8f7469;text-decoration:underline;text-decoration-color:#dfccc2;text-underline-offset:2px}.credit a:hover{color:var(--rose-dark)}
+    .empty{display:none;padding:45px 18px;border:1px dashed #e7d5cc;border-radius:17px;color:var(--muted);text-align:center;font-size:12px}.empty strong{display:block;margin-bottom:6px;color:var(--ink);font-size:15px}
+    .toast{position:fixed;left:50%;bottom:22px;z-index:60;padding:11px 17px;border:1px solid rgba(255,255,255,.65);border-radius:28px;background:var(--ink);color:white;font-size:10px;font-weight:850;box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translate(-50%,14px);transition:all .2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .backdrop{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(49,42,41,.58);backdrop-filter:blur(8px)}.backdrop.open{display:flex}
+    .dialog{position:relative;display:grid;grid-template-columns:minmax(210px,.9fr) minmax(250px,1fr);width:min(740px,100%);max-height:90vh;overflow:auto;border-radius:21px;background:white;box-shadow:0 25px 80px rgba(27,18,17,.25)}
+    .dialog-photo{min-height:340px;overflow:hidden;background:#f4e9e4}.dialog-photo img{display:block;width:100%;height:100%;min-height:340px;object-fit:cover}
+    .dialog-copy{align-self:center;padding:30px}.dialog-kicker{margin-bottom:9px;color:var(--rose);font-size:9px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase}
+    .dialog-copy h2{margin:0;font-size:26px;letter-spacing:-1px;line-height:1.1}.dialog-copy p{margin:12px 0 19px;color:#7c6f69;font-size:11px;line-height:1.75}
+    .dialog-credit{margin:0 0 18px;color:#958781;font-size:9px;line-height:1.6}.dialog-credit a{color:#8f6257;text-decoration:underline}
+    .dialog-save{min-height:41px;padding:0 17px;border:0;border-radius:23px;background:var(--rose);color:white;font-size:10px;font-weight:900}.dialog-save:hover{background:var(--rose-dark)}
+    .close{position:absolute;top:11px;right:11px;z-index:3;display:grid;place-items:center;width:35px;height:35px;border:0;border-radius:50%;background:rgba(255,255,255,.93);color:#493a37;font-size:21px;box-shadow:0 4px 15px rgba(30,20,20,.1)}
+    .footer{max-width:1660px;margin:auto;padding:0 clamp(15px,3.5vw,50px) 25px;color:#a3948d;font-size:9px;line-height:1.7}.footer strong{color:#766660}.hidden{display:none!important}
+    @media(max-width:1120px){.topbar{gap:11px;padding-inline:20px}.top-nav button{padding-inline:10px}.layout{grid-template-columns:190px minmax(0,1fr);padding-inline:20px}main{padding-left:22px}.pin-grid{columns:3 185px}}
+    @media(max-width:820px){.topbar{flex-wrap:wrap;min-height:auto;gap:9px 12px}.brand{margin-right:auto}.top-nav{order:3;width:100%}.top-nav button{flex:1}.search-wrap{order:2;flex:1 1 210px;max-width:none;margin-left:0}.create-button,.avatar{order:2}.layout{display:block;padding-inline:17px}.sidebar{position:static;min-height:0;padding:11px 0 4px;border-right:0;border-bottom:1px solid var(--line)}.sidebar>.side-heading,.sidebar>.side-group,.sidebar>.board-box,.sidebar>.sidebar-note{display:none}.side-links{display:flex;gap:6px;overflow-x:auto;margin:0;padding:0 0 9px}.side-link{flex:0 0 auto;min-height:34px;padding:6px 10px;background:white}.side-icon{width:21px;height:21px}main{padding:23px 0 42px}.pin-grid{columns:3 175px}.footer{padding-inline:17px}}
+    @media(max-width:560px){.topbar{padding:9px 13px}.brand{font-size:18px}.brand-mark{width:35px;height:35px}.top-nav button{font-size:9px;padding:9px 6px}.create-button{height:36px;padding-inline:10px;font-size:9px}.avatar{width:33px;height:33px}.layout{padding-inline:13px}.intro{align-items:flex-start}h1{font-size:33px;letter-spacing:-1.6px}.intro p{max-width:310px;font-size:10px}.pin-count{display:none}.pin-grid{columns:2 135px;column-gap:10px}.pin{margin-bottom:10px;border-radius:13px}.pin-copy{padding:9px}.pin-copy h3{font-size:10px}.pin-copy p{font-size:8px}.credit{font-size:7px}.save-pin{top:7px;right:7px;min-height:29px;padding-inline:8px;font-size:8px;opacity:1;transform:none}.breed-badge{left:7px;bottom:7px;padding:5px 7px;font-size:7px}.dialog{display:block}.dialog-photo,.dialog-photo img{min-height:220px;max-height:40vh}.dialog-copy{padding:20px}.dialog-copy h2{font-size:22px}.footer{padding-inline:13px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <header class="topbar">
+    <button class="brand" id="brandHome" aria-label="Purrfectly home"><span class="brand-mark" aria-hidden="true">♥</span><span class="brand-name">purr<span>fectly</span></span></button>
+    <nav class="top-nav" aria-label="Main navigation">
+      <button class="active" data-view="explore">Explore</button><button data-view="breeds">Cat breeds</button><button data-view="myboard">My board <span id="savedCount"></span></button>
+    </nav>
+    <label class="search-wrap"><span class="hidden">Search cat inspiration</span><input id="searchInput" type="search" placeholder="Search breeds, colors, moods..." aria-label="Search cat inspiration" autocomplete="off"></label>
+    <button class="create-button" id="createBoard">＋ Create a board</button><div class="avatar" aria-label="Your profile">C</div>
+  </header>
 
-    <header>
-      <button class="logo" id="brandHome" aria-label="Go to home">
-        <span class="logo-mark">F.</span>
-        <span>FR<span>A</span>ME</span>
-      </button>
-
-      <nav aria-label="Main navigation">
-        <button class="active" data-nav="home">Discover</button>
-        <button data-nav="series">Series</button>
-        <button data-nav="movies">Movies</button>
-        <button data-nav="mylist">My List <span id="listCount"></span></button>
-      </nav>
-
-      <div class="header-right">
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="Search titles..."
-          aria-label="Search movies and series"
-        >
-        <div class="avatar" title="Profile">V</div>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Cat inspiration categories">
+      <h2 class="side-heading">Your cat corner</h2>
+      <div class="side-links">
+        <button class="side-link active" data-filter="all"><span class="side-icon">⌂</span> All inspiration</button>
+        <button class="side-link" data-filter="tiny"><span class="side-icon">♡</span> Tiny &amp; mighty</button>
+        <button class="side-link" data-filter="fluffy"><span class="side-icon">✿</span> Fluffy favorites</button>
+        <button class="side-link" data-filter="blue"><span class="side-icon">✦</span> Blue-eyed cuties</button>
+        <button class="side-link" data-filter="big"><span class="side-icon">☁</span> Big cat energy</button>
       </div>
-    </header>
+      <div class="side-group"><h2 class="side-heading">Browse by mood</h2><div class="side-links">
+        <button class="side-link" data-filter="playful"><span class="side-icon">↗</span> Playful &amp; curious</button>
+        <button class="side-link" data-filter="sleepy"><span class="side-icon">☾</span> Cozy nap experts</button>
+        <button class="side-link" data-filter="pattern"><span class="side-icon">▧</span> Lovely patterns</button>
+      </div></div>
+      <div class="board-box"><div class="board-title">My little boards <span>＋</span></div>
+        <div class="board-line"><span>Tiny but mighty</span><span class="board-count" id="tinyCount">0</span></div>
+        <div class="board-line"><span>Fluff therapy</span><span class="board-count" id="fluffyCount">0</span></div>
+      </div>
+      <p class="sidebar-note">A happy place for cat people. Save the faces you love and keep your favorite breed ideas together.</p>
+    </aside>
 
     <main>
-      <!-- FEATURED TITLE -->
+      <div class="breadcrumb" aria-label="Breadcrumb"><span>Home</span><b>›</b><span>Pets</span><b>›</b><span>Cat inspiration</span></div>
+      <section class="intro"><div class="intro-copy">
+        <div class="eyebrow">A tiny corner of the internet for cat people</div>
+        <h1>Collect a little<br>more cat happiness.</h1>
+        <p>Browse adorable breeds, save your favorite whiskers, and build a board full of purr-sonality.</p>
+      </div><div class="pin-count" id="pinCount">8 lovely pins</div></section>
 
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow">● FRAME SPOTLIGHT / 01</div>
-
-          <h1>STRANGER<br><span>THINGS</span></h1>
-
-          <div class="hero-meta">
-            <strong>★ 8.7</strong> &nbsp; | &nbsp; 2016– &nbsp; |
-            &nbsp; Sci-Fi · Mystery
-          </div>
-
-          <p>
-            A quiet town, strange signals, and a world hiding just beneath
-            the surface. Follow the clues where the ordinary ends.
-          </p>
-
-          <div class="hero-actions">
-            <button class="btn btn-primary" id="heroExplore">
-              ▶ Explore title
-            </button>
-
-            <button class="btn btn-secondary" id="heroSave">
-              ♡ <span id="heroSaveLabel">Add to My List</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="hero-image">
-          <img
-            id="heroImage"
-            src="./assets/posters/stranger-things.jpg"
-            alt="Stranger Things poster"
-            onerror="handleImageError(this)"
-          >
-        </div>
-      </section>
-
-      <!-- CATALOG -->
-
-      <section id="catalogSection">
-        <div class="section-heading">
-          <div>
-            <div class="section-kicker">YOUR NEXT OBSESSION</div>
-            <h2 id="catalogHeading">The watchlist-worthy six</h2>
-            <p id="catalogSubheading">
-              Unusual worlds. Unforgettable stories.
-            </p>
-          </div>
-
-          <button class="reset-button" id="resetView">
-            Reset view ↗
-          </button>
-        </div>
-
-        <!-- GENRE FILTERS -->
-
-        <div class="filters" aria-label="Filter by genre">
-          <button class="filter active" data-filter="all">All titles</button>
-          <button class="filter" data-filter="mystery">Mystery</button>
-          <button class="filter" data-filter="fantasy">Fantasy</button>
-          <button class="filter" data-filter="thriller">Thriller</button>
-          <button class="filter" data-filter="scifi">Sci-Fi</button>
-        </div>
-
-        <!-- MOVIE AND SERIES GRID -->
-
-        <div class="movie-grid" id="movieGrid"></div>
-      </section>
-
-      <!-- EXTRA INTERACTIVE SECTION -->
-
-      <section class="lower-grid">
-        <div class="feature-box">
-          <div class="eyebrow">CURATED FOR YOU</div>
-          <h3>Find your next obsession.</h3>
-          <p>
-            Discover mysteries, strange worlds, unforgettable characters,
-            and films worth talking about.
-          </p>
-
-          <button class="btn btn-primary" id="surpriseMe">
-            Surprise Me
-          </button>
-
-          <div class="watermark">FRAME</div>
-        </div>
-
-        <div class="feature-box">
-          <div class="eyebrow">YOUR COLLECTION</div>
-          <h3>Your titles. Your choice.</h3>
-          <p>
-            Save movies and series to create a personal watchlist.
-            Your saved titles will stay in this browser.
-          </p>
-
-          <button class="btn btn-secondary" id="openList">
-            View My List
-          </button>
-        </div>
+      <div class="chips" aria-label="Quick cat filters">
+        <button class="chip active" data-filter="all">All cats</button><button class="chip" data-filter="tiny">Tiny &amp; mighty</button>
+        <button class="chip" data-filter="fluffy">Fluffy friends</button><button class="chip" data-filter="blue">Blue-eyed beauties</button>
+        <button class="chip" data-filter="big">Big cat energy</button><button class="chip" data-filter="playful">Playful ones</button><button class="chip" data-filter="sleepy">Nap experts</button>
+      </div>
+      <section aria-labelledby="feedTitle"><div class="feed-head"><h2 id="feedTitle">Fresh pins for your cat board</h2><span>Picked for you · 8 ideas</span></div>
+        <div class="pin-grid" id="pinGrid"></div><div class="empty" id="emptyState"><strong>No little faces found yet</strong>Try another breed, mood, or search.</div>
       </section>
     </main>
-
-    <footer>
-      <strong>FRAME © 2026</strong>
-      <span>
-        A personal movie and series website mockup.
-        Posters are loaded from external image sources.
-      </span>
-    </footer>
   </div>
 
-  <!-- TITLE DETAILS MODAL -->
-
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div
-      class="modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-    >
-      <div class="modal-top">
-        <img id="modalPoster" src="" alt="" onerror="handleImageError(this)">
-      </div>
-
-      <button
-        class="modal-close"
-        id="modalClose"
-        aria-label="Close details"
-      >×</button>
-
-      <div class="modal-content">
-        <div class="eyebrow" id="modalKicker">SERIES PROFILE</div>
-
-        <h2 id="modalTitle">Title</h2>
-
-        <div class="hero-meta" id="modalMeta"></div>
-
-        <p class="description" id="modalDescription"></p>
-
-        <div class="modal-actions">
-          <button class="btn btn-primary" id="modalPlay">
-            ▶ Play Preview
-          </button>
-
-          <button class="btn btn-secondary" id="modalSave">
-            ♡ Add to My List
-          </button>
-        </div>
-
-        <div class="modal-note" id="modalNote">
-          Design prototype only. No movie or episode is streamed.
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <footer class="footer"><strong>Photo credits:</strong> Each pin credits its photographer and links to the Wikimedia Commons file page. The license is shown beside each credit.</footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <div class="backdrop" id="backdrop" aria-hidden="true"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+    <button class="close" id="closeDialog" aria-label="Close pin">×</button><div class="dialog-photo"><img id="dialogPhoto" src="" alt=""></div>
+    <div class="dialog-copy"><div class="dialog-kicker" id="dialogKicker">Cat breed</div><h2 id="dialogTitle">A cute cat</h2><p id="dialogCaption"></p><div class="dialog-credit" id="dialogCredit"></div><button class="dialog-save" id="dialogSave">♡ Save to my board</button></div>
+  </section></div>
+
   <script>
-    // MOVIE AND SERIES DATA
-    // Each title uses its own poster image URL.
+    const cats = [
+      {id:"munchkin",breed:"Munchkin",title:"Tiny legs, big main-character energy",caption:"Small paws, curious eyes, and a whole lot of confidence.",image:"./assets/cats/munchkin.jpg",groups:["tiny","playful"],credit:"Sasha Krotov · CC BY 3.0",source:"https://commons.wikimedia.org/wiki/File:Munchkin_cat.jpg"},
+      {id:"scottish-fold",breed:"Scottish Fold",title:"The sweetest little folded-ear face",caption:"Round cheeks and a soft, thoughtful expression.",image:"./assets/cats/scottish-fold.jpg",groups:["fluffy","sleepy"],credit:"Sofia Lucas · CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:Scottish_fold_cat.jpg"},
+      {id:"ragdoll",breed:"Ragdoll",title:"Blue-eyed cuddle cloud",caption:"A dreamy gaze wrapped in the fluffiest coat.",image:"./assets/cats/ragdoll.jpg",groups:["fluffy","blue","sleepy"],credit:"BigBlobfish · CC0",source:"https://commons.wikimedia.org/wiki/File:Ragdoll_Cat_Face.jpg"},
+      {id:"maine-coon",breed:"Maine Coon",title:"A gentle giant with extra fluff",caption:"Big-cat presence, soft-cat energy.",image:"./assets/cats/maine-coon.jpg",groups:["big","fluffy"],credit:"Jeevitha VM · CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:Maine_Coon_(12835).jpg"},
+      {id:"bengal",breed:"Bengal",title:"Tiny leopard, maximum sparkle",caption:"A spotted coat that brings a little wild to the board.",image:"./assets/cats/bengal.jpg",groups:["playful","pattern"],credit:"Gabel · Public domain",source:"https://commons.wikimedia.org/wiki/File:Bengal_Cat.jpg"},
+      {id:"persian",breed:"Persian",title:"Floof level: expert",caption:"A fluffy daydream with the most boopable nose.",image:"./assets/cats/persian.jpg",groups:["fluffy","sleepy"],credit:"Tukangtamanmurah · CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:Cat_cute_persian_cat.jpg"},
+      {id:"british-shorthair",breed:"British Shorthair",title:"Round cheeks, rounder nap schedule",caption:"A plush little companion who makes cozy look easy.",image:"./assets/cats/british-shorthair.jpg",groups:["fluffy","sleepy"],credit:"George E. Koronaios · CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:British_Shorthair_cat.jpg"},
+      {id:"siamese",breed:"Siamese",title:"Chatty blue-eyed bestie",caption:"Bright eyes, elegant points, and lots to say.",image:"./assets/cats/siamese.jpg",groups:["blue","playful","pattern"],credit:"Achileos · CC BY-SA 2.5",source:"https://commons.wikimedia.org/wiki/File:Siamese_cat.JPG"}
+    ];
 
-    const titles = {
-      "high-potential": {
-        title: "High Potential",
-        kind: "Series",
-        year: "2024–",
-        rating: "7.6",
-        genres: ["Mystery", "Crime", "Drama"],
-        genreKeys: ["mystery"],
-        poster: "./assets/posters/high-potential.jpg",
-        description:
-          "A single mother with an extraordinary mind helps solve complex crimes by noticing the details everyone else misses."
-      },
+    const grid=document.getElementById("pinGrid"),search=document.getElementById("searchInput"),backdrop=document.getElementById("backdrop"),toast=document.getElementById("toast");
+    let filter="all",view="explore",activeId="",lastTrigger=null,timer;
+    let saved=new Set();
+    try{saved=new Set(JSON.parse(localStorage.getItem("purrfectly-saved-pins")||"[]"))}catch(error){saved=new Set()}
 
-      "wheel-of-time": {
-        title: "The Wheel of Time",
-        kind: "Series",
-        year: "2021–",
-        rating: "7.2",
-        genres: ["Fantasy", "Adventure", "Drama"],
-        genreKeys: ["fantasy"],
-        poster: "./assets/posters/wheel-of-time.jpg",
-        description:
-          "In a world shaped by ancient prophecies, a group of young people becomes caught in a journey that could change the fate of the world."
-      },
-
-      "from": {
-        title: "FROM",
-        kind: "Series",
-        year: "2022–",
-        rating: "7.8",
-        genres: ["Mystery", "Horror", "Thriller"],
-        genreKeys: ["mystery", "thriller"],
-        poster: "./assets/posters/from.jpg",
-        description:
-          "Strangers become trapped in a mysterious town where every road leads back and terrifying creatures emerge after dark."
-      },
-
-      "the-platform": {
-        title: "The Platform",
-        kind: "Movie",
-        year: "2019",
-        rating: "7.0",
-        genres: ["Thriller", "Sci-Fi", "Horror"],
-        genreKeys: ["thriller", "scifi"],
-        poster: "./assets/posters/the-platform.jpg",
-        description:
-          "In a vertical prison, food descends one level at a time. The system becomes a brutal test of survival, morality, and human behavior."
-      },
-
-      "welcome-to-derry": {
-        title: "IT: Welcome to Derry",
-        kind: "Series",
-        year: "2025",
-        rating: "New",
-        genres: ["Horror", "Mystery", "Supernatural"],
-        genreKeys: ["thriller", "mystery"],
-        poster: "./assets/posters/welcome-to-derry.jpg",
-        description:
-          "Return to the unsettling world of Derry and explore the town's dark history, where ordinary childhood fears become something far more sinister."
-      },
-
-      "stranger-things": {
-        title: "Stranger Things",
-        kind: "Series",
-        year: "2016–",
-        rating: "8.7",
-        genres: ["Sci-Fi", "Mystery", "Adventure"],
-        genreKeys: ["scifi", "mystery"],
-        poster: "./assets/posters/stranger-things.jpg",
-        description:
-          "When a young boy disappears, his friends uncover secret experiments, unusual powers, and a dangerous world hidden beneath their quiet town."
-      }
-    };
-
-    const movieGrid = document.getElementById("movieGrid");
-    const searchInput = document.getElementById("searchInput");
-    const modalBackdrop = document.getElementById("modalBackdrop");
-    const toast = document.getElementById("toast");
-
-    let activeFilter = "all";
-    let navView = "home";
-    let activeTitleId = "stranger-things";
-    let toastTimer;
-
-    // LOAD SAVED TITLES
-
-    let saved = new Set();
-
-    try {
-      saved = new Set(
-        JSON.parse(localStorage.getItem("frame-saved-titles") || "[]")
-      );
-    } catch (error) {
-      saved = new Set();
+    function esc(value){return String(value).replace(/[&<>"']/g,function(ch){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]})}
+    function render(){
+      grid.innerHTML=cats.map(function(cat){
+        const isSaved=saved.has(cat.id);
+        return '<article class="pin" data-id="'+cat.id+'" data-groups="'+cat.groups.join(" ")+'"><div class="pin-photo" data-title="'+esc(cat.breed)+'">'+
+          '<button class="pin-photo-button" data-open="'+cat.id+'" aria-label="Open '+esc(cat.breed)+' pin"><img src="'+cat.image+'" alt="'+esc(cat.breed)+' cat: '+esc(cat.title)+'" loading="lazy" decoding="async" onerror="handleImageError(this)"></button>'+
+          '<span class="breed-badge">'+esc(cat.breed)+'</span><button class="save-pin '+(isSaved?"saved":"")+'" data-save="'+cat.id+'" aria-pressed="'+String(isSaved)+'">'+(isSaved?"♥ Saved":"♡ Save")+'</button></div>'+
+          '<div class="pin-copy"><h3>'+esc(cat.title)+'</h3><p>'+esc(cat.caption)+'</p><div class="credit">Photo: <a href="'+cat.source+'" target="_blank" rel="noopener noreferrer">'+esc(cat.credit)+'</a></div></div></article>';
+      }).join("");
+      applyFilters();updateCounts();
     }
-
-    // CREATE THE POSTER GRID
-
-    function handleImageError(img) {
-      const container = img.closest(".poster, .hero-image, .modal-top");
-
-      if (!container) return;
-
-      container.classList.add("image-unavailable");
-      container.dataset.posterTitle = img.alt.replace(
-        /\s+(official\s+)?(cover\s+)?poster$/i,
-        ""
-      );
+    function handleImageError(img){const wrap=img.closest(".pin-photo");if(wrap){wrap.classList.add("failed");img.remove()}}
+    function notify(message){toast.textContent=message;toast.classList.add("show");clearTimeout(timer);timer=setTimeout(function(){toast.classList.remove("show")},2200)}
+    function updateCounts(){
+      document.getElementById("savedCount").textContent=saved.size?" · "+saved.size:"";
+      document.getElementById("tinyCount").textContent=cats.filter(function(c){return saved.has(c.id)&&c.groups.indexOf("tiny")!==-1}).length;
+      document.getElementById("fluffyCount").textContent=cats.filter(function(c){return saved.has(c.id)&&c.groups.indexOf("fluffy")!==-1}).length;
+      document.querySelectorAll("[data-save]").forEach(function(button){const yes=saved.has(button.dataset.save);button.classList.toggle("saved",yes);button.textContent=yes?"♥ Saved":"♡ Save";button.setAttribute("aria-pressed",String(yes))});
+      if(activeId)document.getElementById("dialogSave").textContent=saved.has(activeId)?"♥ Saved to my board":"♡ Save to my board";
     }
-
-    function renderCards() {
-      movieGrid.innerHTML = Object.entries(titles).map(([id, item]) => `
-        <article
-          class="movie-card"
-          data-id="${id}"
-          data-kind="${item.kind.toLowerCase()}"
-        >
-          <button
-            class="poster"
-            data-open="${id}"
-            aria-label="View ${item.title} details"
-            style="width:100%;border:0;padding:0;color:inherit;cursor:pointer"
-          >
-            <img
-              src="${item.poster}"
-              alt="${item.title} official cover poster"
-              loading="lazy"
-              decoding="async"
-              onerror="handleImageError(this)"
-            >
-          </button>
-
-          <div class="card-info">
-            <div class="card-title-row">
-              <span class="card-title">${item.title}</span>
-
-              <button
-                class="save-button ${saved.has(id) ? "saved" : ""}"
-                data-save="${id}"
-                aria-label="${saved.has(id) ? "Remove" : "Save"} ${item.title}"
-                aria-pressed="${saved.has(id)}"
-                title="Add or remove from My List"
-              >${saved.has(id) ? "♥" : "♡"}</button>
-            </div>
-
-            <div class="card-meta">
-              <span class="rating">★ ${item.rating}</span>
-              <span>·</span>
-              <span>${item.genres[0]}</span>
-              <span>·</span>
-              <span>${item.year}</span>
-            </div>
-          </div>
-        </article>
-      `).join("");
-
-      applyView();
-      updateSavedUI();
+    function toggleSave(id){
+      const cat=cats.find(function(c){return c.id===id});if(!cat)return;
+      if(saved.has(id)){saved.delete(id);notify("Removed "+cat.breed+" from your board")}else{saved.add(id);notify("Saved "+cat.breed+" to your board")}
+      try{localStorage.setItem("purrfectly-saved-pins",JSON.stringify(Array.from(saved)))}catch(error){notify("Saving is unavailable in this browser.")}
+      updateCounts();applyFilters();
     }
-
-    // SAVE TO LOCAL STORAGE
-
-    function saveData() {
-      try {
-        localStorage.setItem(
-          "frame-saved-titles",
-          JSON.stringify([...saved])
-        );
-      } catch (error) {
-        console.warn("Saved list could not be stored in this browser.");
-      }
-    }
-
-    // NOTIFICATION MESSAGE
-
-    function notify(message) {
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      clearTimeout(toastTimer);
-
-      toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2200);
-    }
-
-    // UPDATE THE SAVE BUTTONS
-
-    function updateSavedUI() {
-      document.getElementById("listCount").textContent =
-        saved.size ? `(${saved.size})` : "";
-
-      document.querySelectorAll("[data-save]").forEach(button => {
-        const id = button.dataset.save;
-        const isSaved = saved.has(id);
-
-        button.classList.toggle("saved", isSaved);
-        button.textContent = isSaved ? "♥" : "♡";
-        button.setAttribute("aria-pressed", String(isSaved));
-
-        if (titles[id]) {
-          button.setAttribute(
-            "aria-label",
-            `${isSaved ? "Remove" : "Save"} ${titles[id].title}`
-          );
-        }
+    function applyFilters(){
+      const query=search.value.trim().toLowerCase();let count=0;
+      document.querySelectorAll(".pin").forEach(function(card){
+        const cat=cats.find(function(c){return c.id===card.dataset.id});
+        const text=(cat.breed+" "+cat.title+" "+cat.caption+" "+cat.groups.join(" ")).toLowerCase();
+        const show=(!query||text.indexOf(query)!==-1)&&(filter==="all"||cat.groups.indexOf(filter)!==-1)&&(view!=="myboard"||saved.has(cat.id));
+        card.classList.toggle("hidden",!show);if(show)count++;
       });
-
-      const heroSaved = saved.has("stranger-things");
-      const heroSave = document.getElementById("heroSave");
-
-      document.getElementById("heroSaveLabel").textContent =
-        heroSaved ? "Saved to My List" : "Add to My List";
-
-      heroSave.classList.toggle("btn-primary", heroSaved);
-      heroSave.classList.toggle("btn-secondary", !heroSaved);
-
-      const modalSave = document.getElementById("modalSave");
-
-      if (titles[activeTitleId]) {
-        modalSave.textContent = saved.has(activeTitleId)
-          ? "♥ Saved to My List"
-          : "♡ Add to My List";
-      }
+      document.getElementById("emptyState").style.display=count?"none":"block";
+      document.getElementById("pinCount").textContent=count+(count===1?" lovely pin":" lovely pins");
+      document.querySelectorAll("[data-filter]").forEach(function(b){b.classList.toggle("active",b.dataset.filter===filter)});
+      document.querySelectorAll("[data-view]").forEach(function(b){b.classList.toggle("active",b.dataset.view===view)});
+      document.getElementById("feedTitle").textContent=view==="myboard"?"Pins saved to your board":filter==="all"?"Fresh pins for your cat board":"More "+filter.replace("-"," ")+" cuteness";
     }
-
-    // ADD OR REMOVE A TITLE
-
-    function toggleSave(id) {
-      const item = titles[id];
-
-      if (!item) return;
-
-      if (saved.has(id)) {
-        saved.delete(id);
-        notify(`Removed ${item.title} from My List`);
-      } else {
-        saved.add(id);
-        notify(`Added ${item.title} to My List`);
-      }
-
-      saveData();
-      updateSavedUI();
-      applyView();
+    function openPin(id,trigger){
+      const cat=cats.find(function(c){return c.id===id});if(!cat)return;
+      activeId=id;lastTrigger=trigger||document.activeElement;
+      const photo=document.getElementById("dialogPhoto");photo.style.display="";photo.parentElement.style.background="";photo.src=cat.image;photo.alt=cat.breed+" cat";
+      photo.onerror=function(){photo.style.display="none";photo.parentElement.style.background="linear-gradient(145deg,#f8dcd1,#eee8f7)"};
+      document.getElementById("dialogKicker").textContent=cat.breed+" · breed inspiration";
+      document.getElementById("dialogTitle").textContent=cat.title;document.getElementById("dialogCaption").textContent=cat.caption;
+      document.getElementById("dialogCredit").innerHTML='Photo: <a href="'+cat.source+'" target="_blank" rel="noopener noreferrer">'+esc(cat.credit)+'</a>';
+      updateCounts();backdrop.classList.add("open");backdrop.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("closeDialog").focus();
     }
-
-    // OPEN TITLE DETAILS
-
-    function openDetails(id) {
-      const item = titles[id];
-
-      if (!item) return;
-
-      activeTitleId = id;
-
-      const modalPoster = document.getElementById("modalPoster");
-      const modalTop = modalPoster.closest(".modal-top");
-      modalTop.classList.remove("image-unavailable");
-      modalTop.dataset.posterTitle = item.title;
-      modalPoster.src = item.poster;
-      modalPoster.alt = `${item.title} cover poster`;
-
-      document.getElementById("modalKicker").textContent =
-        item.kind === "Movie" ? "MOVIE PROFILE" : "SERIES PROFILE";
-
-      document.getElementById("modalTitle").textContent = item.title;
-
-      document.getElementById("modalMeta").textContent =
-        `★ ${item.rating}  |  ${item.year}  |  ${item.genres.join(" · ")}`;
-
-      document.getElementById("modalDescription").textContent =
-        item.description;
-
-      document.getElementById("modalNote").textContent =
-        "This is a website mockup. The preview button demonstrates an interaction; no movie or episode is streamed.";
-
-      document.getElementById("modalPlay").textContent = "▶ Play Preview";
-
-      updateSavedUI();
-
-      modalBackdrop.classList.add("open");
-      document.body.style.overflow = "hidden";
-
-      document.getElementById("modalClose").focus();
-    }
-
-    // CLOSE THE DETAIL WINDOW
-
-    function closeModal() {
-      modalBackdrop.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-
-    // SEARCH, GENRE FILTERS, AND NAVIGATION
-
-    function applyView() {
-      const query = searchInput.value.trim().toLowerCase();
-      let visibleCount = 0;
-
-      document.querySelectorAll(".movie-card").forEach(card => {
-        const id = card.dataset.id;
-        const item = titles[id];
-
-        if (!item) return;
-
-        const searchableText = [
-          item.title,
-          item.kind,
-          item.year,
-          ...item.genres
-        ].join(" ").toLowerCase();
-
-        const matchesSearch =
-          !query || searchableText.includes(query);
-
-        const matchesGenre =
-          activeFilter === "all" ||
-          item.genreKeys.includes(activeFilter);
-
-        const matchesNav =
-          navView === "home" ||
-          (navView === "series" && item.kind === "Series") ||
-          (navView === "movies" && item.kind === "Movie") ||
-          (navView === "mylist" && saved.has(id));
-
-        const isVisible =
-          matchesSearch && matchesGenre && matchesNav;
-
-        card.classList.toggle("hidden", !isVisible);
-
-        if (isVisible) visibleCount++;
-      });
-
-      let headings = {
-        home: [
-          "The watchlist-worthy six",
-          "Unusual worlds. Unforgettable stories."
-        ],
-        series: [
-          "Series worth getting lost in",
-          "Long stories. Strange places. Bigger questions."
-        ],
-        movies: [
-          "Movie night, sorted",
-          "Find your next film."
-        ],
-        mylist: [
-          "Your saved titles",
-          saved.size
-            ? `${saved.size} saved title${saved.size === 1 ? "" : "s"} in your personal list.`
-            : "Tap a heart on any title to build your list."
-        ]
-      };
-
-      document.getElementById("catalogHeading").textContent =
-        headings[navView][0];
-
-      document.getElementById("catalogSubheading").textContent =
-        headings[navView][1];
-
-      let emptyState = document.getElementById("emptyState");
-
-      if (!emptyState) {
-        emptyState = document.createElement("div");
-        emptyState.id = "emptyState";
-        emptyState.className = "empty-state";
-        emptyState.textContent =
-          "No titles found. Try another search or filter.";
-        movieGrid.appendChild(emptyState);
-      }
-
-      emptyState.style.display =
-        visibleCount === 0 ? "block" : "none";
-
-      document.querySelectorAll("[data-nav]").forEach(button => {
-        button.classList.toggle(
-          "active",
-          button.dataset.nav === navView
-        );
-      });
-
-      document.querySelectorAll("[data-filter]").forEach(button => {
-        button.classList.toggle(
-          "active",
-          button.dataset.filter === activeFilter
-        );
-      });
-    }
-
-    // CLICK INTERACTIONS
-
-    movieGrid.addEventListener("click", event => {
-      const saveButton = event.target.closest("[data-save]");
-
-      if (saveButton) {
-        event.stopPropagation();
-        toggleSave(saveButton.dataset.save);
-        return;
-      }
-
-      const openButton = event.target.closest("[data-open]");
-
-      if (openButton) {
-        openDetails(openButton.dataset.open);
-      }
-    });
-
-    document.getElementById("brandHome").addEventListener("click", () => {
-      navView = "home";
-      activeFilter = "all";
-      searchInput.value = "";
-
-      applyView();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
-
-    document.querySelectorAll("[data-nav]").forEach(button => {
-      button.addEventListener("click", () => {
-        navView = button.dataset.nav;
-
-        if (navView === "movies") {
-          activeFilter = "all";
-        }
-
-        applyView();
-
-        document.getElementById("catalogSection").scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      });
-    });
-
-    document.querySelectorAll("[data-filter]").forEach(button => {
-      button.addEventListener("click", () => {
-        activeFilter = button.dataset.filter;
-        applyView();
-      });
-    });
-
-    searchInput.addEventListener("input", () => {
-      applyView();
-    });
-
-    document.getElementById("heroExplore").addEventListener("click", () => {
-      openDetails("stranger-things");
-    });
-
-    document.getElementById("heroSave").addEventListener("click", () => {
-      toggleSave("stranger-things");
-    });
-
-    document.getElementById("modalClose").addEventListener("click", () => {
-      closeModal();
-    });
-
-    modalBackdrop.addEventListener("click", event => {
-      if (event.target === modalBackdrop) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener("keydown", event => {
-      if (
-        event.key === "Escape" &&
-        modalBackdrop.classList.contains("open")
-      ) {
-        closeModal();
-      }
-    });
-
-    document.getElementById("modalSave").addEventListener("click", () => {
-      toggleSave(activeTitleId);
-    });
-
-    document.getElementById("modalPlay").addEventListener("click", () => {
-      document.getElementById("modalPlay").textContent =
-        "▶ Preview Selected";
-
-      document.getElementById("modalNote").textContent =
-        "Demo preview selected. Connect a licensed trailer or video source for actual playback.";
-
-      notify("Demo preview selected — no video is attached.");
-    });
-
-    document.getElementById("resetView").addEventListener("click", () => {
-      navView = "home";
-      activeFilter = "all";
-      searchInput.value = "";
-
-      applyView();
-    });
-
-    document.getElementById("openList").addEventListener("click", () => {
-      navView = "mylist";
-
-      applyView();
-
-      document.getElementById("catalogSection").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
-
-    document.getElementById("surpriseMe").addEventListener("click", () => {
-      const visibleCards = [
-        ...document.querySelectorAll(".movie-card:not(.hidden)")
-      ];
-
-      if (visibleCards.length === 0) {
-        notify("No titles available for the current filters.");
-        return;
-      }
-
-      const chosen =
-        visibleCards[Math.floor(Math.random() * visibleCards.length)];
-
-      openDetails(chosen.dataset.id);
-    });
-
-    // INITIALIZE WEBSITE
-
-    renderCards();
+    function closePin(){backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastTrigger&&lastTrigger.focus)lastTrigger.focus()}
+    grid.addEventListener("click",function(event){const saveButton=event.target.closest("[data-save]");if(saveButton){toggleSave(saveButton.dataset.save);return}const openButton=event.target.closest("[data-open]");if(openButton)openPin(openButton.dataset.open,openButton)});
+    document.querySelectorAll("[data-filter]").forEach(function(button){button.addEventListener("click",function(){filter=button.dataset.filter;view="explore";applyFilters()})});
+    document.querySelectorAll("[data-view]").forEach(function(button){button.addEventListener("click",function(){view=button.dataset.view;if(view==="breeds")filter="all";applyFilters()})});
+    search.addEventListener("input",applyFilters);
+    document.getElementById("brandHome").addEventListener("click",function(){view="explore";filter="all";search.value="";window.scrollTo({top:0,behavior:"smooth"});applyFilters()});
+    document.getElementById("createBoard").addEventListener("click",function(){notify("Your cat board is ready — save a pin to add to it!");document.getElementById("feedTitle").scrollIntoView({behavior:"smooth",block:"start"})});
+    document.getElementById("closeDialog").addEventListener("click",closePin);
+    document.getElementById("dialogSave").addEventListener("click",function(){if(activeId)toggleSave(activeId)});
+    backdrop.addEventListener("click",function(event){if(event.target===backdrop)closePin()});
+    document.addEventListener("keydown",function(event){if(event.key==="Escape"&&backdrop.classList.contains("open"))closePin()});
+    render();
   </script>
 </body>
 </html>
